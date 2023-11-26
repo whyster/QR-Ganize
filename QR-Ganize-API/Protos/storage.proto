@@ -1,0 +1,74 @@
+syntax = "proto3";
+option csharp_namespace = "QR_Ganize_API";
+
+package storage;
+
+
+// The greeting service definition.
+service Store {
+  
+  // region Create
+  rpc CreateBox (CreateBoxRequest) returns (Box) {}
+  rpc CreateLocation (CreateLocationRequest) returns (Location) {}
+  rpc CreateItem (CreateItemRequest) returns (Item) {}
+  rpc CreateTag (CreateTagRequest) returns (Tag) {}
+  
+  // region Get
+  rpc GetTags (GetTagRequest) returns (GetTagReply) {}
+}
+
+
+
+
+message GetTagRequest {
+  repeated string tag_names = 1;
+}
+message GetTagReply {
+  repeated Tag tags = 1; 
+}
+
+message CreateBoxRequest {
+  string name = 1;
+  int32 location_id = 2;
+  repeated int32 tag_ids = 3;
+}
+message CreateLocationRequest {
+  string name = 1;
+}
+
+message CreateTagRequest {
+  string name = 1;
+}
+
+message CreateItemRequest {
+  string name = 1;
+  repeated int32 tag_ids = 2;
+  int32 box_id = 3;
+}
+
+
+
+
+message Item {
+  int32 id = 1;
+  string name = 2;
+  repeated Tag tags = 3;
+  optional Box box = 4;
+}
+
+message Box {
+  int32 id = 1;
+  string name = 2;
+  Location location = 3;
+  repeated Tag tags = 4;
+}
+
+message Location {
+  int32 id = 1;
+  string name = 2;
+}
+
+message Tag {
+  int32 id = 1;
+  string name = 2;
+}
