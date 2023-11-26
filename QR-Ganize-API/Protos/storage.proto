@@ -8,44 +8,58 @@ package storage;
 service Store {
   
   // region Create
-  rpc CreateBox (CreateBoxRequest) returns (Box) {}
-  rpc CreateLocation (CreateLocationRequest) returns (Location) {}
-  rpc CreateItem (CreateItemRequest) returns (Item) {}
-  rpc CreateTag (CreateTagRequest) returns (Tag) {}
+    rpc CreateBox (CreateBoxRequest) returns (CreateBoxReply) {}
+    rpc CreateLocation (CreateLocationRequest) returns (CreateLocationReply) {}
+    rpc CreateItem (CreateItemRequest) returns (CreateItemReply) {}
+    rpc CreateTag (CreateTagRequest) returns (CreateTagReply) {}
   
   // region Get
-  rpc GetTags (GetTagRequest) returns (GetTagReply) {}
+    rpc GetTags (GetTagRequest) returns (GetTagReply) {}
+//    rpc GetBoxes
+//    rpc GetLocations
+//    rpc GetItems
 }
 
+// Region CreateBox
+  message CreateBoxRequest {
+    string name = 1;
+    int32 location_id = 2;
+    repeated int32 tag_ids = 3;
+  }
+  message CreateBoxReply {
+  }
+
+// Region CreateLocation
+  message CreateLocationRequest {
+    string name = 1;
+  }
+  message CreateLocationReply {
+  }
+
+// Region CreateTag
+  message CreateTagRequest {
+    string name = 1;
+  }
+  message CreateTagReply {
+  }
+
+// Region Create Item
+  message CreateItemRequest {
+    string name = 1;
+    repeated int32 tag_ids = 2;
+    int32 box_id = 3;
+  }
+  message CreateItemReply {
+  }
 
 
-
-message GetTagRequest {
-  repeated string tag_names = 1;
-}
-message GetTagReply {
-  repeated Tag tags = 1; 
-}
-
-message CreateBoxRequest {
-  string name = 1;
-  int32 location_id = 2;
-  repeated int32 tag_ids = 3;
-}
-message CreateLocationRequest {
-  string name = 1;
-}
-
-message CreateTagRequest {
-  string name = 1;
-}
-
-message CreateItemRequest {
-  string name = 1;
-  repeated int32 tag_ids = 2;
-  int32 box_id = 3;
-}
-
+// Region GetTag
+  message GetTagRequest {
+    repeated string tag_names = 1;
+  }
+  message GetTagReply {
+    repeated Tag tags = 1;
+  }
 
 
 
