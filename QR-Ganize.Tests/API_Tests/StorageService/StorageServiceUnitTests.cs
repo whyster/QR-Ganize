@@ -9,7 +9,8 @@ namespace QR_Ganize.Tests.API_Tests.StorageService;
 
 public class TestResult<TSuccess, TError> : Result<TSuccess, TError>;
 
-public class CreateTests
+
+public abstract class CreateTests
 {
     private static ILogger<T> CreateConsoleLogger<T>()
     {
@@ -32,7 +33,9 @@ public class CreateTests
             null);
     }
 
-    #region CreateItem Tests
+    public class CreateItem
+    {
+        #region CreateItem Tests
     [Fact]
     public async Task CreateItem_UniqueBoxName_ReturnsOK()
     {
@@ -160,8 +163,11 @@ public class CreateTests
     }
 
     #endregion
+    }
 
-    #region CreateBox Tests
+    public class CreateBox
+    {
+        #region CreateBox Tests
 
     [Fact]
     public async Task CreateBox_UniqueBoxName_ReturnsOK()
@@ -290,8 +296,11 @@ public class CreateTests
     }
 
     #endregion
+    }
 
-    #region CreateLocation Tests
+    public class CreateLocation
+    {
+        #region CreateLocation Tests
 
     [Fact]
     public async Task CreateLocation_UniqueLocationName_ReturnsOK()
@@ -397,8 +406,11 @@ public class CreateTests
     }
 
     #endregion
+    }
 
-    #region CreateTag Tests
+    public class CreateTag
+    {
+        #region CreateTag Tests
 
     [Fact]
     public async Task CreateTag_UniqueTagName_ReturnsOK()
@@ -509,4 +521,5 @@ public class CreateTests
     }
 
     #endregion
+    }
 }
