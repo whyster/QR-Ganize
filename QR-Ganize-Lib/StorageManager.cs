@@ -3,14 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace QR_Ganize_Lib;
 
-public enum CreationError
-{
-    AlreadyExists,
-    BoxNotFound,
-    LocationNotFound,
-}
-
-public class StorageManager
+public class StorageManager : IStorageManager
 {
     private StorageDbContext _dbContext;
     private ILogger _logger;
