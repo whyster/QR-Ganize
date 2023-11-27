@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QR-Ganize-API", "QR-Ganize-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QR-Ganize-Server", "QR-Ganize-Server\QR-Ganize-Server.csproj", "{B319CC49-0311-47FD-84B6-75F47CC3AFE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QR-Ganize.Tests", "QR-Ganize.Tests\QR-Ganize.Tests.csproj", "{E416DFDF-46B3-4612-8708-7881FABA3AD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{B319CC49-0311-47FD-84B6-75F47CC3AFE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B319CC49-0311-47FD-84B6-75F47CC3AFE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B319CC49-0311-47FD-84B6-75F47CC3AFE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E416DFDF-46B3-4612-8708-7881FABA3AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E416DFDF-46B3-4612-8708-7881FABA3AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E416DFDF-46B3-4612-8708-7881FABA3AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E416DFDF-46B3-4612-8708-7881FABA3AD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
