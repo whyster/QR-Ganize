@@ -7,10 +7,10 @@ namespace QR_Ganize_API.Services;
 
 public class StorageService : Store.StoreBase
 {
-    private readonly StorageManager _storageManager;
+    private readonly IStorageManager _storageManager;
     private ILogger _logger;
 
-    public StorageService(StorageManager storageManager, ILogger<StorageService> logger)
+    public StorageService(IStorageManager storageManager, ILogger<StorageService> logger)
     {
         _storageManager = storageManager;
         _logger = logger;

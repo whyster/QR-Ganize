@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.AddDbContext<StorageDbContext>(optionsBuilder => optionsBuilder.UseSqlite("Data Source=storage.db"));
-builder.Services.AddScoped<StorageManager>();
+builder.Services.AddScoped<IStorageManager, StorageManager>();
 
 
 
