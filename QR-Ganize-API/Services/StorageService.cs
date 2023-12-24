@@ -1,5 +1,3 @@
-
-using Google.Protobuf.Collections;
 using Grpc.Core;
 using QR_Ganize_Lib;
 
@@ -16,12 +14,7 @@ public class StorageService : Store.StoreBase
         _logger = logger;
     }
 
-    public override async Task<GetTagReply> GetTags(GetTagRequest request, ServerCallContext context)
-    {
-        var tags = await _storageManager.GetTags(request.TagNames);
-        return new GetTagReply {Tags = { tags.Select(tag => new Tag {Id = tag.TagId, Name = tag.Name}) }};
-    }
-    
+
     public override async Task<CreateTagReply> CreateTag(CreateTagRequest request, ServerCallContext context)
     {
         var result = await _storageManager.CreateTag(request.Name);
@@ -41,7 +34,8 @@ public class StorageService : Store.StoreBase
         }
     }
 
-    public override async Task<CreateLocationReply> CreateLocation(CreateLocationRequest request, ServerCallContext context)
+    public override async Task<CreateLocationReply> CreateLocation(CreateLocationRequest request,
+        ServerCallContext context)
     {
         var result = await _storageManager.CreateLocation(request.Name);
         switch (result)
@@ -60,7 +54,7 @@ public class StorageService : Store.StoreBase
         }
     }
 
-    public override async Task<CreateBoxReply> CreateBox(CreateBoxRequest request, ServerCallContext context) 
+    public override async Task<CreateBoxReply> CreateBox(CreateBoxRequest request, ServerCallContext context)
     {
         var result = await _storageManager.CreateBox(request.Name, request.TagIds, request.LocationId);
         switch (result)
@@ -100,5 +94,31 @@ public class StorageService : Store.StoreBase
             default:
                 throw new ArgumentOutOfRangeException(nameof(result));
         }
+    }
+
+    public override async Task<GetTagsReply> GetTags(GetTagsRequest request, ServerCallContext context)
+    {
+        var tags = await _storageManager.GetTags(request.TagNames);
+        return new GetTagsReply {Tags = {tags.Select(tag => new Tag {Id = tag.TagId, Name = tag.Name})}};
+    }
+
+    public override async Task<GetBoxesReply> GetBoxes(GetBoxesRequest request, ServerCallContext context)
+    {
+        var boxes = await _storageManager.GetBoxes();
+        var fixedBoxes = boxes.Select(box =>
+            new Box
+            {
+                Id = box.BoxId,
+                Name = box.Name,
+                Tags =
+                {
+                    box.Tags.Select(tagMap =>
+                        new Tag {Id = tagMap.Tag.TagId, Name = tagMap.Tag.Name}
+                    )
+                },
+                Location = new Location {Id = box.Location.LocationId, Name = box.Location.Name}
+            }
+        );
+        return new GetBoxesReply {Boxes = {fixedBoxes}};
     }
 }

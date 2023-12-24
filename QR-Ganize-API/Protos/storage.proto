@@ -14,8 +14,8 @@ service Store {
     rpc CreateTag (CreateTagRequest) returns (CreateTagReply) {}
   
   // region Get
-    rpc GetTags (GetTagRequest) returns (GetTagReply) {}
-//    rpc GetBoxes
+  rpc GetTags (GetTagsRequest) returns (GetTagsReply) {}
+  rpc GetBoxes (GetBoxesRequest) returns (GetBoxesReply) {}
 //    rpc GetLocations
 //    rpc GetItems
 }
@@ -54,12 +54,22 @@ service Store {
 
 
 // Region GetTag
-  message GetTagRequest {
+message GetTagsRequest {
     repeated string tag_names = 1;
   }
-  message GetTagReply {
+message GetTagsReply {
     repeated Tag tags = 1;
   }
+
+
+// Region GetBoxes
+message GetBoxesRequest {
+
+}
+message GetBoxesReply {
+  repeated Box boxes = 1;
+}
+
 
 
 
