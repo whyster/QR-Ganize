@@ -124,4 +124,22 @@ public class StorageManager : IStorageManager
         return await _dbContext.Boxes.Include(box => box.Location).Include(box => box.Tags)
             .ThenInclude(boxTagMap => boxTagMap.Tag).ToListAsync();
     }
+
+    public async Task<IEnumerable<Location>> GetLocations()
+    {
+        return await _dbContext.Locations.ToListAsync();
+    }
+
+    public async Task<IEnumerable<Item>> GetItems()
+    {
+        return await _dbContext.Items
+            .Include(item => item.Tags)
+            .ThenInclude(tagMap => tagMap.Tag)
+            .Include(item => item.Box)
+            .ThenInclude(box => box.Location)
+            .Include(item => item.Box)
+            .ThenInclude(box => box.Tags)
+            .ThenInclude(tagMap => tagMap.Tag)
+            .ToListAsync();
+    }
 }

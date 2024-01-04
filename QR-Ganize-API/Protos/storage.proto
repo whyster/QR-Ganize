@@ -16,8 +16,8 @@ service Store {
   // region Get
   rpc GetTags (GetTagsRequest) returns (GetTagsReply) {}
   rpc GetBoxes (GetBoxesRequest) returns (GetBoxesReply) {}
-//    rpc GetLocations
-//    rpc GetItems
+  rpc GetLocations (GetLocationsRequest) returns (GetLocationsReply) {}
+  rpc GetItems (GetItemsRequest) returns (GetItemsReply) {}
 }
 
 // Region CreateBox
@@ -70,6 +70,20 @@ message GetBoxesReply {
   repeated Box boxes = 1;
 }
 
+// Region GetLocations
+message GetLocationsRequest {
+}
+message GetLocationsReply {
+  repeated Location locations = 1;
+}
+
+// Region GetItems
+message GetItemsRequest {
+
+}
+message GetItemsReply {
+  repeated Item items = 1;
+}
 
 
 

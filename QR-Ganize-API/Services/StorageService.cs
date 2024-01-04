@@ -121,4 +121,29 @@ public class StorageService : Store.StoreBase
         );
         return new GetBoxesReply {Boxes = {fixedBoxes}};
     }
+
+    public override async Task<GetLocationsReply> GetLocations(GetLocationsRequest request, ServerCallContext context)
+    {
+        var locations = await _storageManager.GetLocations();
+        var returnLocations = locations.Select(locationDTO =>
+            new Location {Id = locationDTO.LocationId, Name = locationDTO.Name});
+        return new GetLocationsReply {Locations = {returnLocations}};
+    }
+
+    public override async Task<GetItemsReply> GetItems(GetItemsRequest request, ServerCallContext context)
+    {
+        var items = await _storageManager.GetItems();
+        var returnItems = items.Select(itemDTO => new Item
+        {
+            Id = itemDTO.ItemId, Name = itemDTO.Name,
+            Box = new Box
+            {
+                Id = itemDTO.Box.BoxId, Name = itemDTO.Box.Name,
+                Location = new Location {Id = itemDTO.Box.Location.LocationId, Name = itemDTO.Box.Location.Name},
+                Tags = {itemDTO.Box.Tags.Select(tagDTO => new Tag {Id = tagDTO.TagId, Name = tagDTO.Tag.Name})}
+            },
+            Tags = {itemDTO.Tags.Select(tagDTO => new Tag {Id = tagDTO.TagId, Name = tagDTO.Tag.Name})}
+        });
+        return new GetItemsReply {Items = {returnItems.ToList()}};
+    }
 }

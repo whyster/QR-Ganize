@@ -20,4 +20,6 @@ public interface IStorageManager
 
     public Task<IEnumerable<Tag>> GetTags(IEnumerable<string> tagNames);
     public Task<IEnumerable<Box>> GetBoxes();
+    public Task<IEnumerable<Location>> GetLocations();
+    public Task<IEnumerable<Item>> GetItems();
 }
